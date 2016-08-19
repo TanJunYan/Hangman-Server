@@ -68,7 +68,28 @@ h1 {
 	color: #f00;
 	text-align: center;
 }
-#play, #clear {
+
+#resulttable {
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+    font-weight: normal;
+}
+
+#resulttable th {
+    background-color: #4CAF50;
+    color: white;
+}
+#resulttable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#resulttable tr:hover {
+    background-color: #f545f5;
+}
+
+
+#play, #clear, #signin, #signup, #oauthsignin, #creategame, #deletebutton, #players, #words {
 	display: none;
 	width: 140px;
 	padding: 0.25em 0;
@@ -78,6 +99,28 @@ h1 {
 	cursor: pointer;
 	color: #fff;
 	background-color: #069;
+}
+#data {
+    clear: both;
+}
+#left-div {
+    float: left;
+    width: 400px;
+    margin-right: 8px;
+    /*background-color: linen;*/
+}
+#right-div {
+    margin-left: 408px;
+    /*background-color: skyblue;*/
+}​
+
+
+.inputfield {
+    margin: 0.2em 0 0 13px;
+    font-size: 112.5%;
+}
+#authentication {
+    float: right;
 }
 #stage {
 	float: right;

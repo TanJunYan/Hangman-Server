@@ -9,8 +9,8 @@ function init() {
     
     // Hide the loading message and display the control buttons
     $('#loading').hide();
-    $('#play').css('display', 'inline-block').click(newGame);
-    $('#clear').css('display', 'inline-block').click(resetScore);
+    //$('#play').css('display', 'inline-block').click(newGame);
+    //$('#clear').css('display', 'inline-block').click(resetScore);
     $('#help').click(function(e) {
         $('body').append('<div id="mask"></div>');
         helptext.show().css('margin-left', (w-300)/2 + 'px');
@@ -24,14 +24,15 @@ function init() {
     if (screen.innerWidth >= 700) {
         canvas.getContext('2d').scale(1.5, 1.5);
     }
-
-    showScore();
+    initGame(word_length);
+    checkLetterWithServer('');
+    //showScore();
 }
 
 // Display the score in the canvas
 function showScore()
 {
-    getCurrentScoreFromServer();
+    //getCurrentScoreFromServer();
 } 
 function drawScore(score)
 {
@@ -230,6 +231,7 @@ function requestNewGameFromServer() {
         }
     };
     xmlhttp.open("POST", url, true);
+    xmlhttp.setRequestHeader("Authorization", "Token " + sessionStorage.token);
     xmlhttp.send();
 }
 
@@ -237,7 +239,7 @@ function requestNewGameFromServer() {
 function checkLetterWithServer(letter)
 {
     var xmlhttp = new XMLHttpRequest();
-    var url = "/check_letter";
+    var url = "/games/" + game_id + "/check_letter";
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -248,6 +250,7 @@ function checkLetterWithServer(letter)
     };
     xmlhttp.open("POST", url, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.setRequestHeader("Authorization", "Token " + sessionStorage.token);
     xmlhttp.send(JSON.stringify({ guess : letter }));
 }
 
@@ -282,5 +285,6 @@ function resetScoreInServer()
         }
     };
     xmlhttp.open("DELETE", url, true);
+    xmlhttp.setRequestHeader("Authorization", "Token " + sessionStorage.token);
     xmlhttp.send();
 }
